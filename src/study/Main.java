@@ -22,16 +22,18 @@ public class Main {
      */
     public static void main(String[] args){
         String inputTemp=new String();
-        System.out.println("Study or create?");
+        System.out.println("Import or create?");
         inputTemp=reader.nextLine();
-        if(inputTemp.charAt(0)==('s')){
-            study();
+        if((inputTemp.charAt(0)==('i'))||(inputTemp.charAt(0)==('I'))){
+            imprt();
         }
-        else if(inputTemp.charAt(0)==('c')){
+        if((inputTemp.charAt(0)==('c'))||(inputTemp.charAt(0)==('C'))){
             create();
         }
         else{
-            imprt();
+            System.out.println("Invalid command: "+inputTemp);
+            System.out.println("Entering default create mode...");
+            create();
         }
     }
     public static void study(){
@@ -127,12 +129,14 @@ public class Main {
         for(int card=0;card<terms.size();card++){
             outputSave=outputSave+""+terms.get(card).toString()+";";
         }
-        listFileName=terms.get(0).toString(term.frontInt)+""+Math.random();
+        System.out.println("Please give this set of terms a title:");
+        listFileName=reader.nextLine();
+        //listFileName=terms.get(0).toString(term.frontInt)+""+Math.random();
         fileIO.save(outputSave, listFileName);
         study();
     }
     public static void imprt(){
-        System.out.println("Input file name:");
+        System.out.println("Input file name (with extension):");
         String fileName=reader.nextLine();
         String inputText=new String();
         inputText=fileIO.read(fileName);
